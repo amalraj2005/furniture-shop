@@ -6,22 +6,24 @@ function Category() {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [categoryName]);
+useEffect(() => {
+  fetchProducts();
+}, [categoryName]);
 
+useEffect(() => {
   const fetchProducts = async () => {
     const { data, error } = await supabase
       .from("products")
       .select("*")
       .eq("category", categoryName);
 
-    if (error) {
-      console.log(error);
-    } else {
+    if (!error) {
       setProducts(data);
     }
   };
+
+  fetchProducts();
+}, [categoryName]);
 
   return (
     <div className="container mt-5">
