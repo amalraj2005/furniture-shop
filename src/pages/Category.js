@@ -6,24 +6,22 @@ function Category() {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
 
-useEffect(() => {
-  fetchProducts();
-}, [categoryName]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .eq("category", categoryName);
 
-useEffect(() => {
-  const fetchProducts = async () => {
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .eq("category", categoryName);
+      if (error) {
+        console.log(error);
+      } else {
+        setProducts(data);
+      }
+    };
 
-    if (!error) {
-      setProducts(data);
-    }
-  };
-
-  fetchProducts();
-}, [categoryName]);
+    fetchProducts();
+  }, [categoryName]);
 
   return (
     <div className="container mt-5">
@@ -36,31 +34,21 @@ useEffect(() => {
               {product.image_url && (
                 <img
                   src={product.image_url}
-                  className="card-img-top"
                   alt={product.name}
+                  className="card-img-top"
                   style={{ height: "250px", objectFit: "cover" }}
                 />
               )}
 
               <div className="card-body">
-                <h5 className="card-title">{product.name}</h5>
-                <h6 className="text-success">₹{product.customer_price}</h6>
-                <p className="card-text">{product.description}</p>
-
-                <button className="btn btn-dark w-100">
-                  View Details
-                </button>
+                <h5>{product.name}</h5>
+                <p>₹{product.customer_price}</p>
+                <p>{product.description}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
-
-      {products.length === 0 && (
-        <p className="text-center text-muted">
-          No products available in this category.
-        </p>
-      )}
     </div>
   );
 }
