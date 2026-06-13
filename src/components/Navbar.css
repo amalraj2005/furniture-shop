@@ -1,0 +1,77 @@
+.custom-navbar {
+  width: 100%;
+  padding: 18px 6%;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.brand-logo {
+  text-decoration: none;
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.brand-red {
+  color: #ff2d2d;
+}
+
+.brand-blue {
+  color: #1976ff;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-links a,
+.nav-links button {
+  color: white;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links button:hover {
+  color: #ff2d2d;
+}
+
+.signup-btn {
+  background: #ff2d2d !important;
+  padding: 8px 18px;
+  border-radius: 25px;
+  color: white !important;
+}
+
+.signup-btn:hover {
+  background: #1976ff !important;
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .brand-logo {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}

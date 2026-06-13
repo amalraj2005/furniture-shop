@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
+import "./Navbar.css";
 
 function Navbar() {
   const [user, setUser] = useState(null);
@@ -14,16 +15,11 @@ function Navbar() {
       checkUser();
     });
 
-    return () => {
-      listener.subscription.unsubscribe();
-    };
+    return () => listener.subscription.unsubscribe();
   }, []);
 
   const checkUser = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
+    const { data: { user } } = await supabase.auth.getUser();
     setUser(user);
 
     if (user) {
@@ -47,53 +43,34 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-      <Link className="navbar-brand" to="/">
-        Furniture Shop
+    <nav className="custom-navbar">
+      <Link className="brand-logo" to="/">
+        <span className="brand-red">Furniture</span>
+        <span className="brand-blue"> Gallery</span>
       </Link>
 
-      <div className="ms-auto">
-        <Link className="btn btn-outline-light me-2" to="/">
-          Home
-        </Link>
+      <div className="nav-links">
+        <Link to="/">Home</Link>
 
         {!user && (
           <>
-            <Link className="btn btn-outline-warning me-2" to="/login">
-              Login
-            </Link>
-
-            <Link className="btn btn-warning" to="/signup">
-              Sign Up
-            </Link>
+            <Link to="/login">Login</Link>
+            <Link className="signup-btn" to="/signup">Sign Up</Link>
           </>
         )}
 
         {user && role === "user" && (
           <>
-            <Link className="btn btn-outline-info me-2" to="/cart">
-              Cart
-            </Link>
-
-            <Link className="btn btn-outline-light me-2" to="/profile">
-              Profile
-            </Link>
-
-            <button className="btn btn-danger" onClick={logout}>
-              Logout
-            </button>
+            <Link to="/cart">Cart</Link>
+            <Link to="/profile">Profile</Link>
+            <button onClick={logout}>Logout</button>
           </>
         )}
 
         {user && role === "admin" && (
           <>
-            <Link className="btn btn-outline-warning me-2" to="/admin">
-              Admin Panel
-            </Link>
-
-            <button className="btn btn-danger" onClick={logout}>
-              Logout
-            </button>
+            <Link to="/admin">Admin Panel</Link>
+            <button onClick={logout}>Logout</button>
           </>
         )}
       </div>
