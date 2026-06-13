@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { supabase } from "../supabase";
 
 function Category() {
@@ -40,11 +40,18 @@ function Category() {
                 />
               )}
 
-              <div className="card-body">
-                <h5>{product.name}</h5>
-                <p>₹{product.customer_price}</p>
-                <p>{product.description}</p>
-              </div>
+<div className="card-body">
+  <h5>{product.name}</h5>
+  <p>₹{product.customer_price}</p>
+  <p>{product.description}</p>
+
+  <Link
+    to={`/product/${product.id}`}
+    className="btn btn-dark w-100"
+  >
+    View Details
+  </Link>
+</div>
             </div>
           </div>
         ))}

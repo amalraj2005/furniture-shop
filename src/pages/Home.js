@@ -15,45 +15,82 @@ function Home() {
       .from("categories")
       .select("*");
 
-    if (error) {
-      console.log(error);
-    } else {
+    if (!error) {
       setCategories(data);
     }
   };
 
   return (
     <div>
+
+      {/* HERO SECTION */}
       <div className="hero-section">
-        <div className="overlay">
-          <h1>Luxury Furniture Collection</h1>
-          <p>Transform your living space with premium furniture.</p>
-          <button className="btn btn-warning btn-lg">
-            Explore Collection
-          </button>
+        <div className="hero-overlay">
+
+          <div className="logo-symbol">
+            <div className="left-shape"></div>
+            <div className="right-shape"></div>
+          </div>
+
+          <h1 className="hero-title">
+            <span className="red-text">FURNITURE</span>
+            <br />
+            <span className="blue-text">GALLERY</span>
+          </h1>
+
+          <p className="hero-subtitle">
+            Premium furniture for your dream home
+          </p>
+
+<button
+  className="shop-btn"
+  onClick={() => {
+    document
+      .getElementById("categories")
+      .scrollIntoView({
+        behavior: "smooth",
+      });
+  }}
+>
+  SHOP NOW
+</button>
+
         </div>
       </div>
 
-      <div className="container mt-5">
-        <h2 className="text-center mb-4">Shop By Category</h2>
+      {/* CATEGORY SECTION */}
+
+      <div id="categories" className="container py-5">
+        <h2 className="text-center fw-bold mb-5">
+          Shop By Category
+        </h2>
 
         <div className="row">
           {categories.map((category) => (
-            <div className="col-md-3 mb-4" key={category.id}>
+            <div
+              className="col-lg-3 col-md-4 col-sm-6 mb-4"
+              key={category.id}
+            >
               <Link
                 to={`/category/${category.name}`}
-                style={{ textDecoration: "none" }}
+                style={{
+                  textDecoration: "none",
+                }}
               >
-                <div className="card shadow border-0 h-100">
-                  <div className="card-body text-center">
-                    <h5>{category.name}</h5>
+                <div className="category-card">
+
+                  <div className="category-card-body">
+                    <h4>{category.name}</h4>
+                    <span>Explore Collection →</span>
                   </div>
+
                 </div>
               </Link>
             </div>
           ))}
         </div>
       </div>
+
     </div>
   );
 }
