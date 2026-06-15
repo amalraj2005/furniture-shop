@@ -1,3 +1,5 @@
+import { Link, useNavigate } from "react-router-dom";
+
 function Footer() {
   return (
     <footer
@@ -20,19 +22,19 @@ function Footer() {
 
           <div className="col-md-3">
             <h5>Popular Categories</h5>
-            <p>Sofa Set</p>
-            <p>Wardrobe</p>
-            <p>Bed</p>
-            <p>Dining Table</p>
-            <p>Chair</p>
+            <p><Link to="/category/Sofa Set">Sofa Set</Link></p>
+            <p><Link to="/category/Wardrobe">Wardrobe</Link></p>
+            <p><Link to="/category/Bed">Bed</Link></p>
+            <p><Link to="/category/Dining Table">Dining Table</Link></p>
+            <p><Link to="/category/Chair">Chair</Link></p>
           </div>
 
           <div className="col-md-2">
             <h5>Quick Links</h5>
-            <p>Home</p>
-            <p>Profile</p>
-            <p>Cart</p>
-            <p>Contact</p>
+            <p><Link to="/">Home</Link></p>
+            <p><Link to="/profile">Profile</Link></p>
+            <p><Link to="/cart">Cart</Link></p>
+            <p><Link to="/">Contact</Link></p>
           </div>
 
           <div className="col-md-3">

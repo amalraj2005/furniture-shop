@@ -22,7 +22,7 @@ function Home() {
   const categories = [
     { name: "Sofa Set", image: "/images/sofa set.jpg" },
     { name: "Wardrobe", image: "/images/wardrobe.jpg" },
-    { name: "Beds", image: "/images/bed.jpg" },
+    { name: "Bed", image: "/images/bed.jpg" },
     { name: "Dining Table", image: "/images/dining.jpg" },
     { name: "Office Furniture", image: "/images/office.jpg" },
     { name: "Chair", image: "/images/chair.jpg" },
