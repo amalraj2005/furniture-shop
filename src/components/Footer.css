@@ -1,0 +1,11 @@
+.footer-link {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  /* margin-bottom: 5px; */
+}
+
+.footer-link:hover {
+  color: #ffd166;
+  text-decoration: none;
+}
