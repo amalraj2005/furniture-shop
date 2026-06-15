@@ -1,7 +1,7 @@
 .custom-navbar {
   width: 100%;
   padding: 18px 6%;
-  background: rgba(10, 10, 10, 0.92);
+  background: rgb(255, 255, 255);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
@@ -35,7 +35,7 @@
 
 .nav-links a,
 .nav-links button {
-  color: white;
+  color: rgb(37, 27, 27);
   text-decoration: none;
   background: transparent;
   border: none;

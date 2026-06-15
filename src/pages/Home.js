@@ -1,96 +1,77 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../supabase";
 import "./Home.css";
 
 function Home() {
-  const [categories, setCategories] = useState([]);
+  const heroImages = [
+    "/images/hero1.jpg",
+    "/images/hero2.jpg",
+    "/images/hero3.jpg",
+  ];
+
+  const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
 
-  const fetchCategories = async () => {
-    const { data, error } = await supabase
-      .from("categories")
-      .select("*");
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
 
-    if (!error) {
-      setCategories(data);
-    }
-  };
+  const categories = [
+    { name: "Sofa Set", image: "/images/sofa set.jpg" },
+    { name: "Wardrobe", image: "/images/wardrobe.jpg" },
+    { name: "Beds", image: "/images/bed.jpg" },
+    { name: "Dining Table", image: "/images/dining.jpg" },
+    { name: "Office Furniture", image: "/images/office.jpg" },
+    { name: "Plastic Chairs", image: "/images/chair.jpg" },
+  ];
 
   return (
-    <div>
-
-      {/* HERO SECTION */}
-      <div className="hero-section">
-        <div className="hero-overlay">
-
-          <div className="logo-symbol">
-            <div className="left-shape"></div>
-            <div className="right-shape"></div>
-          </div>
-
-          <h1 className="hero-title">
-            <span className="red-text">FURNITURE</span>
-            <br />
-            <span className="blue-text">GALLERY</span>
-          </h1>
-
-          <p className="hero-subtitle">
-            Premium furniture for your dream home
-          </p>
-
-<button
-  className="shop-btn"
-  onClick={() => {
-    document
-      .getElementById("categories")
-      .scrollIntoView({
-        behavior: "smooth",
-      });
-  }}
->
-  SHOP NOW
-</button>
-
-        </div>
-      </div>
-
-      {/* CATEGORY SECTION */}
-
-      <div id="categories" className="container py-5">
-        <h2 className="text-center fw-bold mb-5">
-          Shop By Category
+    <div className="home">
+      {/* <nav className="navbar">
+        <h2>
+          <span>Furniture</span> Gallery
         </h2>
 
-        <div className="row">
-          {categories.map((category) => (
-            <div
-              className="col-lg-3 col-md-4 col-sm-6 mb-4"
-              key={category.id}
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/admin">Admin Panel</Link>
+          <Link to="/login">Logout</Link>
+        </div>
+      </nav> */}
+
+<section
+  className="hero-banner"
+  style={{
+    backgroundImage: `url(${heroImages[currentImage]})`,
+  }}
+>
+  <div className="hero-shade">
+    <p className="tag">Heavy Savings Ahead</p>
+    <h1>Style your Interiers</h1>
+    <p>Explore sofas, wardrobes, beds, dining sets and more.</p>
+    <button>Shop Now</button>
+  </div>
+</section>
+      <section className="category-section">
+        <h2>Explore Categories</h2>
+
+        <div className="category-grid">
+          {categories.map((cat) => (
+            <Link
+              to={`/category/${cat.name}`}
+              className="category-card"
+              key={cat.name}
             >
-              <Link
-                to={`/category/${category.name}`}
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <div className="category-card">
-
-                  <div className="category-card-body">
-                    <h4>{category.name}</h4>
-                    <span>Explore Collection →</span>
-                  </div>
-
-                </div>
-              </Link>
-            </div>
+              <img src={cat.image} alt={cat.name} className="category-img" />
+              <h3>{cat.name}</h3>
+              <p>View Products</p>
+            </Link>
           ))}
         </div>
-      </div>
-
+      </section>
     </div>
   );
 }
