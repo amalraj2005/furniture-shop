@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../supabase";
+import "./Category.css";
 
 function Category() {
   const { categoryName } = useParams();
@@ -24,34 +25,42 @@ function Category() {
   }, [categoryName]);
 
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4 text-center">{categoryName}</h1>
+    <div className="category-page">
+      <div className="category-header">
+        <h1>{categoryName}</h1>
+        <p>{products.length} Products Available</p>
+      </div>
 
-      <div className="row">
+      <div className="product-grid">
         {products.map((product) => (
-          <div className="col-md-4 mb-4" key={product.id}>
-            <div className="card shadow h-100">
-              {product.image_url && (
-                <img
-                  src={product.image_url}
-                  alt={product.name}
-                  className="card-img-top"
-                  style={{ height: "250px", objectFit: "cover" }}
-                />
-              )}
+          <div className="product-card" key={product.id}>
+            {product.image_url && (
+              <img
+                src={product.image_url}
+                alt={product.name}
+                className="product-img"
+              />
+            )}
 
-<div className="card-body">
-  <h5>{product.name}</h5>
-  <p>₹{product.customer_price}</p>
-  <p>{product.description}</p>
+            <div className="product-info">
+              <h3>{product.name}</h3>
 
-  <Link
-    to={`/product/${product.id}`}
-    className="btn btn-dark w-100"
-  >
-    View Details
-  </Link>
-</div>
+              <p className="product-description">
+                {product.description}
+              </p>
+
+              <div className="product-footer">
+                <span className="price">
+                  ₹{product.customer_price}
+                </span>
+
+                <Link
+                  to={`/product/${product.id}`}
+                  className="view-btn"
+                >
+                  View Details
+                </Link>
+              </div>
             </div>
           </div>
         ))}

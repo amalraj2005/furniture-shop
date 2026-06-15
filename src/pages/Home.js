@@ -25,7 +25,7 @@ function Home() {
     { name: "Beds", image: "/images/bed.jpg" },
     { name: "Dining Table", image: "/images/dining.jpg" },
     { name: "Office Furniture", image: "/images/office.jpg" },
-    { name: "Plastic Chairs", image: "/images/chair.jpg" },
+    { name: "Chair", image: "/images/chair.jpg" },
   ];
 
   return (
